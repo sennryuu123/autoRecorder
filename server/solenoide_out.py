@@ -1,36 +1,36 @@
-#Import RPi.gpio as GPIO
-import time
+# Import RPi.gpio as GPIO
+# Import time
 
-def solenoide_out(expect,sout,test):
-	BPM = 80
-	bars = 0
-	note = 0
-	notemax = 0
-	barsmax = 0
-	count = 0
 
-	barsmax = len(expect)
-	for bars in range(barsmax):
-	    notemax = len(expect[bars])
-	    for note in range(notemax):
-	        temp = expect[bars][note]["pitch"]
-	        octave = temp["octave"]
-	        step = temp["step"]
-	        duration = expect[bars][note]["duration"]
-	        
-	        table = pitch(octave,step,test,count)
-	        count = count + 1
-	        output(table,sout)
-	        if sout[0] == 2:
-                   print("PitchError")
-	        print(sout)
-	        time = duration*60/BPM
-	        #print("solenoid=", end = "")
-	        #for i in range(10):
-	        #    print(sout[i], end = "")
-	        #print()
-	        #ras_out(sout,time)
-	        sout = [0 for i in range(10)]
+def solenoide_out(expect, sout, test):
+    BPM = 80
+    bars = 0
+    note = 0
+    notemax = 0
+    barsmax = 0
+    count = 0
+    barsmax = len(expect)
+    for bars in range(barsmax):
+        notemax = len(expect[bars])
+        for note in range(notemax):
+            temp = expect[bars][note]["pitch"]
+            octave = temp["octave"]
+            step = temp["step"]
+            duration = expect[bars][note]["duration"]
+            table = pitch(octave, step, test, count)
+            count = count + 1
+            output(table, sout)
+            if sout[0] == 2:
+                print("PitchError")
+            print(sout)
+            time = duration*60/BPM
+            print(time)
+            # Print("solenoid=", end = "")
+            # For i in range(10):
+            # Print(sout[i], end = "")
+            # Print()
+            # Ras_out(sout,time)
+            sout = [0 for i in range(10)]
 
 """
 def ras_out (X,dtime):
@@ -44,9 +44,11 @@ def ras_out (X,dtime):
     time.sleep(dtime)
 
 """
-def pitch (octave, step,test1,count1):
-    list_step = ['C','D','E','F','G','A','B']
-    list_octave = [4,5]
+
+
+def pitch(octave, step, test1, count1):
+    list_step = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
+    list_octave = [4, 5]
     for i in range(2):
         for j in range(7):
             if octave == list_octave[i]:
@@ -59,7 +61,8 @@ def pitch (octave, step,test1,count1):
                 return_num = 0
     return return_num
 
-def output(num1,out):
+
+def output(num1, out):
     i = 0
     if num1 == 1:
         for i in range(10):
@@ -89,4 +92,3 @@ def output(num1,out):
         out[2] = 1
     else:
         out[0] = 2
-
