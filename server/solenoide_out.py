@@ -2,23 +2,21 @@
 # Import time
 
 
-def solenoide_out(expect, sout, test):
+def solenoide_out(basedata, sout):
     BPM = 80
     bars = 0
     note = 0
     notemax = 0
     barsmax = 0
-    count = 0
-    barsmax = len(expect)
+    barsmax = len(basedata)
     for bars in range(barsmax):
-        notemax = len(expect[bars])
+        notemax = len(basedata[bars])
         for note in range(notemax):
-            temp = expect[bars][note]["pitch"]
+            temp = basedata[bars][note]["pitch"]
             octave = temp["octave"]
             step = temp["step"]
-            duration = expect[bars][note]["duration"]
-            table = pitch(octave, step, test, count)
-            count = count + 1
+            duration = basedata[bars][note]["duration"]
+            table = pitch(octave, step)
             output(table, sout)
             if sout[0] == 2:
                 print("PitchError")
@@ -46,14 +44,13 @@ def ras_out (X,dtime):
 """
 
 
-def pitch(octave, step, test1, count1):
+def pitch(octave, step):
     list_step = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
     list_octave = [4, 5]
     for i in range(2):
         for j in range(7):
             if octave == list_octave[i]:
                 if step == list_step[j]:
-                    test1[count1] = step
                     return i*7+j+1
                 else:
                     return_num = 0
@@ -63,7 +60,6 @@ def pitch(octave, step, test1, count1):
 
 
 def output(num1, out):
-    i = 0
     if num1 == 1:
         for i in range(10):
             out[i] = 1
