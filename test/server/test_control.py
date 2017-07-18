@@ -10,6 +10,4 @@ class TestRun(unittest.TestCase):
         test_list = ["G", "F", "E", "E", "B", "G"]
         run(test_solenoide)
         self.assertEqual(test_list, test_solenoide)
-
-
     unittest.main()
