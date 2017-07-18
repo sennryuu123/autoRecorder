@@ -8,7 +8,7 @@ else:
     import ConfigParser as configparser
 
 CONF = configparser.ConfigParser()
-CONF.read('./config.ini')
+CONF.read('../config.ini')
 
 if py_3:
     CONF = CONF['SERVER']
