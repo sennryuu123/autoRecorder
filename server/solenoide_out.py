@@ -2,12 +2,9 @@
 # Import time
 
 
-def solenoide_out(basedata, sout):
+def solenoide_out(basedata, sout, pit):
     BPM = 80
-    bars = 0
-    note = 0
-    notemax = 0
-    barsmax = 0
+    count = 0
     barsmax = len(basedata)
     for bars in range(barsmax):
         notemax = len(basedata[bars])
@@ -17,7 +14,7 @@ def solenoide_out(basedata, sout):
             step = temp["step"]
             duration = basedata[bars][note]["duration"]
             table = pitch(octave, step)
-            output(table, sout)
+            output(table, sout, count, pit)
             if sout[0] == 2:
                 print("PitchError")
             print(sout)
@@ -29,6 +26,7 @@ def solenoide_out(basedata, sout):
             # Print()
             # Ras_out(sout,time)
             sout = [0 for i in range(10)]
+            count = count + 1
 
 """
 def ras_out (X,dtime):
@@ -59,32 +57,42 @@ def pitch(octave, step):
     return return_num
 
 
-def output(num1, out):
+def output(num1, out, q, pi):
     if num1 == 1:
         for i in range(10):
             out[i] = 1
+        pi[q] = "C4"
     elif num1 == 2:
         for i in range(8):
             out[i] = 1
+        pi[q] = "D4"
     elif num1 == 3:
         for i in range(6):
             out[i] = 1
+        pi[q] = "E4"
     elif num1 == 4:
         for i in range(5):
             out[i] = 1
+        pi[q] = "F4"
     elif num1 == 5:
         for i in range(4):
             out[i] = 1
+        pi[q] = "G4"
     elif num1 == 6:
         for i in range(3):
             out[i] = 1
+        pi[q] = "A4"
     elif num1 == 7:
         for i in range(2):
             out[i] = 1
+        pi[q] = "B4"
     elif num1 == 8:
         out[0] = 1
         out[2] = 1
+        pi[q] = "C5"
     elif num1 == 9:
         out[2] = 1
+        pi[q] = "D5"
     else:
         out[0] = 2
+        pi[q] = "error"
